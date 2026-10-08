@@ -61,5 +61,5 @@ def dashboard():
     return render_template(
         "health_dashboard.html"
     )
-
-app.run(debug=True)
+if __name__ == "__main__":
+    app.run(debug=False)
