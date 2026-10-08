@@ -1,0 +1,486 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>AI Health Assistant</title>
+
+    <style>
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: Arial, Helvetica, sans-serif;
+            min-height: 100vh;
+
+            background:
+                linear-gradient(
+                    135deg,
+                    #ecfdf5,
+                    #f0fdfa,
+                    #ffffff
+                );
+
+            color: #243333;
+        }
+
+
+        /* NAVBAR */
+
+        .navbar {
+            height: 72px;
+
+            display: flex;
+            align-items: center;
+
+            padding: 0 8%;
+
+            background: rgba(255, 255, 255, 0.85);
+
+            border-bottom: 1px solid #dff3ef;
+
+            backdrop-filter: blur(10px);
+        }
+
+        .logo {
+            font-size: 23px;
+            font-weight: 700;
+
+            color: #0f766e;
+        }
+
+
+        /* MAIN */
+
+        .main {
+            min-height: calc(100vh - 72px);
+
+            display: flex;
+            align-items: center;
+            justify-content: center;
+
+            padding: 50px 20px;
+        }
+
+
+        .content {
+            width: 100%;
+            max-width: 1100px;
+
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+
+            gap: 60px;
+
+            align-items: center;
+        }
+
+
+        /* LEFT SIDE */
+
+        .left h1 {
+            font-size: 52px;
+            line-height: 1.1;
+
+            color: #134e4a;
+
+            margin-bottom: 20px;
+        }
+
+        .left h1 span {
+            color: #0f766e;
+        }
+
+        .left p {
+            font-size: 18px;
+            line-height: 1.7;
+
+            color: #64748b;
+
+            max-width: 520px;
+        }
+
+
+        /* FEATURES */
+
+        .features {
+            margin-top: 30px;
+
+            display: flex;
+            flex-direction: column;
+
+            gap: 15px;
+        }
+
+        .feature {
+            display: flex;
+            align-items: center;
+
+            gap: 13px;
+
+            color: #475569;
+
+            font-size: 15px;
+        }
+
+        .feature-icon {
+            width: 38px;
+            height: 38px;
+
+            display: flex;
+            align-items: center;
+            justify-content: center;
+
+            background: #d1fae5;
+
+            border-radius: 10px;
+
+            font-size: 18px;
+        }
+
+
+        /* FORM CARD */
+
+        .health-card {
+            background: rgba(255, 255, 255, 0.95);
+
+            padding: 38px;
+
+            border-radius: 24px;
+
+            box-shadow:
+                0 20px 50px rgba(15, 118, 110, 0.12);
+
+            border: 1px solid #dff3ef;
+        }
+
+        .card-icon {
+            width: 58px;
+            height: 58px;
+
+            display: flex;
+            align-items: center;
+            justify-content: center;
+
+            background: #ccfbf1;
+
+            border-radius: 16px;
+
+            font-size: 28px;
+
+            margin-bottom: 20px;
+        }
+
+        .health-card h2 {
+            font-size: 27px;
+
+            color: #134e4a;
+
+            margin-bottom: 8px;
+        }
+
+        .health-card .subtitle {
+            color: #64748b;
+
+            font-size: 14px;
+
+            line-height: 1.6;
+
+            margin-bottom: 25px;
+        }
+
+
+        /* TEXTAREA */
+
+        .input-label {
+            display: block;
+
+            font-size: 14px;
+
+            font-weight: 600;
+
+            color: #334155;
+
+            margin-bottom: 9px;
+        }
+
+        textarea {
+            width: 100%;
+
+            min-height: 150px;
+
+            resize: vertical;
+
+            padding: 16px;
+
+            border: 1px solid #cbd5e1;
+
+            border-radius: 14px;
+
+            outline: none;
+
+            font-family: inherit;
+
+            font-size: 15px;
+
+            color: #334155;
+
+            background: #f8fafc;
+
+            transition: 0.25s;
+        }
+
+        textarea:focus {
+            border-color: #14b8a6;
+
+            background: white;
+
+            box-shadow:
+                0 0 0 4px rgba(20, 184, 166, 0.10);
+        }
+
+        textarea::placeholder {
+            color: #94a3b8;
+        }
+
+
+        /* BUTTON */
+
+        .submit-btn {
+            width: 100%;
+
+            margin-top: 18px;
+
+            padding: 15px;
+
+            border: none;
+
+            border-radius: 13px;
+
+            background: linear-gradient(
+                135deg,
+                #0f766e,
+                #14b8a6
+            );
+
+            color: white;
+
+            font-size: 16px;
+
+            font-weight: 600;
+
+            cursor: pointer;
+
+            transition: 0.25s;
+        }
+
+        .submit-btn:hover {
+            transform: translateY(-2px);
+
+            box-shadow:
+                0 10px 20px rgba(15, 118, 110, 0.20);
+        }
+
+
+        /* DISCLAIMER */
+
+        .disclaimer {
+            margin-top: 20px;
+
+            padding: 13px;
+
+            background: #fffbeb;
+
+            border-radius: 10px;
+
+            border-left: 4px solid #f59e0b;
+
+            font-size: 12px;
+
+            line-height: 1.5;
+
+            color: #78350f;
+        }
+
+
+        /* MOBILE */
+
+        @media (max-width: 800px) {
+
+            .content {
+                grid-template-columns: 1fr;
+
+                gap: 35px;
+            }
+
+            .left h1 {
+                font-size: 38px;
+            }
+
+            .left p {
+                font-size: 16px;
+            }
+
+            .health-card {
+                padding: 28px;
+            }
+
+        }
+
+    </style>
+
+</head>
+
+
+<body>
+
+
+<!-- NAVBAR -->
+
+<nav class="navbar">
+
+    <div class="logo">
+        🩺 AI Health Assistant
+    </div>
+
+</nav>
+
+
+<!-- MAIN -->
+
+<main class="main">
+
+    <div class="content">
+
+
+        <!-- LEFT SECTION -->
+
+        <section class="left">
+
+            <h1>
+                Understand your
+                <span>health better.</span>
+            </h1>
+
+            <p>
+                Describe the symptoms you are experiencing and our
+                AI-powered health assistant will provide general health
+                information, possible associated conditions, precautions,
+                and guidance on when you should consider seeking medical care.
+            </p>
+
+
+            <div class="features">
+
+                <div class="feature">
+
+                    <div class="feature-icon">
+                        🔍
+                    </div>
+
+                    <span>
+                        AI-assisted symptom analysis
+                    </span>
+
+                </div>
+
+
+                <div class="feature">
+
+                    <div class="feature-icon">
+                        🛡️
+                    </div>
+
+                    <span>
+                        General precautions and self-care guidance
+                    </span>
+
+                </div>
+
+
+                <div class="feature">
+
+                    <div class="feature-icon">
+                        🚨
+                    </div>
+
+                    <span>
+                        Guidance about when to seek medical care
+                    </span>
+
+                </div>
+
+            </div>
+
+        </section>
+
+
+
+        <!-- FORM -->
+
+        <section class="health-card">
+
+            <div class="card-icon">
+                🩺
+            </div>
+
+            <h2>
+                Tell us how you feel
+            </h2>
+
+            <p class="subtitle">
+                Enter your symptoms in your own words. You can mention
+                things such as cough, fever, headache, fatigue, sore throat,
+                etc.
+            </p>
+
+
+            <form action="/home" method="POST">
+
+                <label class="input-label">
+                    Describe your symptoms
+                </label>
+
+                <textarea
+                    name="sym"
+                    placeholder="Example: I have a sore throat, mild cough and fever for the last two days..."
+                    required
+                ></textarea>
+
+
+                <button
+                    type="submit"
+                    class="submit-btn">
+
+                    Analyze My Symptoms →
+
+                </button>
+
+            </form>
+
+
+            <div class="disclaimer">
+
+                ⚠️ <strong>Important:</strong>
+                This tool provides general AI-generated health information
+                and is not a substitute for professional medical diagnosis
+                or treatment.
+
+            </div>
+
+        </section>
+
+    </div>
+
+</main>
+
+</body>
+
+</html>
