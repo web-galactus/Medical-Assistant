@@ -4,8 +4,9 @@ import json
 
 app = Flask(__name__)
 
+ 
 
-@app.route("/home", methods=["GET", "POST"])
+@app.route("/", methods=["GET", "POST"])
 def home():
 
     if request.method == "POST":
